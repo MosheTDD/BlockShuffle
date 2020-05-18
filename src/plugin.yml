@@ -1,0 +1,7 @@
+name: BlockShuffle
+author: MosheTDD
+main: me.moshe.blockshuffle.BlockShuffle
+version: 1.0
+
+commands:
+  bs:

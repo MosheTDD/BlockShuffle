@@ -1,0 +1,6 @@
+notAPlayer: '&cOnly players may execute this command!'
+noPermission: '&cYou do not have permission to execute this command!'
+illegalArguments: '&cIllegal Arguments! Please try again with the correct arguments!'
+targetNull: '&b%target%&c Is offline or they do not exist!'
+
+timer: 15
