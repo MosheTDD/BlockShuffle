@@ -2,16 +2,13 @@ package me.moshe.blockshuffle.commands;
 
 import me.moshe.blockshuffle.BlockShuffle;
 import me.moshe.blockshuffle.listeners.BlockShuffleEvents;
-import me.moshe.blockshuffle.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 
@@ -54,7 +51,7 @@ public class BlockShuffleCommand implements CommandExecutor {
         ArrayList<Material> blocks = new ArrayList<>();
         for (Material block : Material.values()) {
             if (block.isBlock()) {
-                if (!block.isEdible() && block.isSolid()) {
+                if (!block.isEdible() && block.isSolid() && block.equals(Material.BARRIER)) {
                     blocks.add(block);
                 }
             }
@@ -63,7 +60,8 @@ public class BlockShuffleCommand implements CommandExecutor {
         Material randomB = blocks.get((Math.abs(rnd.nextInt(blocks.size()))));
         System.out.println(randomB);
         plugin.map.put(p, randomB);
-        sendRawMsg(p, "&6You must find and stand on a &c" + randomB.name() + " &6within &b&l" + ci("timer") + " &6seconds!");
+        String blockName = randomB.name().toLowerCase().replace("_", " ");
+        sendRawMsg(p, "&6You must find and stand on a &c" + blockName + " &6within &b&l" + ci("timer") + " &6seconds!");
         new BukkitRunnable(){
             int countDown = ci("timer");
             public void run(){
@@ -82,7 +80,7 @@ public class BlockShuffleCommand implements CommandExecutor {
                     cancel();
                 }
                 if(countDown <= 10){
-                    sendRawMsg(p, "&6You have &b&l" + countDown + " &6seconds left to find " + randomB.name());
+                    sendRawMsg(p, "&6You have &b&l" + countDown + " &6seconds left to find " + blockName);
                 }
                 countDown--;
             }
