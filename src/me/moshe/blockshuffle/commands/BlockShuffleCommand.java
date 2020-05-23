@@ -51,7 +51,7 @@ public class BlockShuffleCommand implements CommandExecutor {
         ArrayList<Material> blocks = new ArrayList<>();
         for (Material block : Material.values()) {
             if (block.isBlock()) {
-                if (!block.isEdible() && block.isSolid() && block.equals(Material.BARRIER)) {
+                if (!block.isEdible() && block.isSolid() && !block.equals(Material.BARRIER)) {
                     blocks.add(block);
                 }
             }
@@ -75,7 +75,7 @@ public class BlockShuffleCommand implements CommandExecutor {
                     cancel();
                 }
                 if(BlockShuffleEvents.active){
-                    sendRawMsg(p,"&6Good job! You found the block!");
+                    sendRawMsg(p,"&aGood job! You found the block!");
                     plugin.map.remove(p);
                     cancel();
                 }
